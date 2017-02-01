@@ -1,5 +1,7 @@
+# coding:utf-8
 from flask import Flask, render_template, request
 from werkzeug import secure_filename
+from classifier import otaku_classifier
 import os
 
 app = Flask(__name__)
@@ -26,9 +28,10 @@ def post():
     img.save(path)
     return 'yes' if is_otaku(path) else 'no'
 
-# TODO 判別機
+# 判別機
 def is_otaku(path):
-    return True
+    # オタク識別器を通してオタクか判定
+    return otaku_classifier(path)
 
 
 if __name__ == '__main__':
